@@ -8,8 +8,6 @@ div.innerHTML = `
     <p>Boas vindas à semana de pré-work para o Bootcamp em React.js 😁</p>
     `;
 
-div.style.display = "block";
-
 const toggle = {
   block: () => {
     div.style.display = "none";
@@ -22,5 +20,5 @@ const toggle = {
 };
 
 btn.addEventListener("click", () => {
-  toggle[div.style.display]();
+  toggle[div.style.display || "block"]();
 });
