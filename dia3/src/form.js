@@ -1,32 +1,18 @@
-const body = document.querySelector("body");
-
-body.innerHTML = `
-  <form>
-    <label for="name">Name</label>
-    <input type="text" name="name" id="name" data-js="input-name">
-  </form>
-`;
-
 // Abaixo implementação do input capitalize
+const input = document.querySelector('[data-js="input-name"]');
 
-const input = body.querySelector('[data-js="input-name"]');
-
-function exceptions(word) {
-  const exceptions = ["de", "da", "do", "dos"];
-  return exceptions.some((excp) => word.toLowerCase() === excp);
-}
+const execptions = ["de", "da", "das", "do", "dos"];
 
 function capitalize(word) {
-  let splitWords = word.toLowerCase().split(" ");
-  for (let i = 0; i < splitWords.length; i++) {
-    if (exceptions(splitWords[i])) {
-      splitWords[i] = splitWords[i].toLowerCase();
-    } else {
-      splitWords[i] =
-        splitWords[i].charAt(0).toUpperCase() + splitWords[i].substring(1);
-    }
-  }
-  return splitWords.join(" ");
+  return word
+    .toLowerCase()
+    .split(" ")
+    .map((word) =>
+      execptions.includes(word)
+        ? word
+        : (word = word.charAt(0).toUpperCase() + word.substring(1))
+    )
+    .join(" ");
 }
 
 input.addEventListener("input", (event) => {
@@ -35,7 +21,7 @@ input.addEventListener("input", (event) => {
 
 // Abaixo implementação do Select Color
 
-const form = body.querySelector("form");
+const form = document.querySelector("form");
 const createSelect = `
   </br>
   </br>
@@ -50,7 +36,9 @@ const createSelect = `
 form.insertAdjacentHTML("beforeend", createSelect);
 
 const select = document.querySelector('[data-js="select"]');
-body.insertAdjacentHTML("beforeend", '<div data-js="color"></div>');
+document
+  .querySelector("body")
+  .insertAdjacentHTML("beforeend", '<div data-js="color"></div>');
 
 select.addEventListener("change", (event) => {
   const colorDiv = document.querySelector('[data-js="color"]');
