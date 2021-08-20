@@ -20,33 +20,44 @@ input.addEventListener("input", (event) => {
 });
 
 // Abaixo implementação do Select Color
+const form = document.querySelector("[data-js='form']");
+const select = document.createElement("select");
+select.setAttribute("data-js", "select-color");
+select.multiple = true;
+select.style.display = "block";
+select.style.margin = "30px 0 20px 0";
 
-const form = document.querySelector("form");
-const createSelect = `
-  </br>
-  </br>
-  <select name="select" multiple data-js="select">
-    <option value="#ff0000">FF0000</option>
-    <option value="#00ff00">00FF00</option>
-    <option value="#0000ff">0000FF</option>
-    <option value="#ffff00">FFFF00</option>
-    <option value="#f000ff">F00FFF</option>
-  </select>
-`;
-form.insertAdjacentHTML("beforeend", createSelect);
+const colors = [
+  { text: "Black", value: "#000000" },
+  { text: "Yellow", value: "#FFFF00" },
+  { text: "Red", value: "#FF0000" },
+  { text: "Green", value: "#00FF00" },
+  { text: "Blue", value: "#0000FF" },
+  { text: "Magenta", value: "#FF00FF" },
+];
 
-const select = document.querySelector('[data-js="select"]');
-document
-  .querySelector("body")
-  .insertAdjacentHTML("beforeend", '<div data-js="color"></div>');
+colors.forEach(({ text, value }) => {
+  const option = document.createElement("option");
+  option.value = value;
+  option.textContent = text;
+  select.appendChild(option);
+});
+
+form.appendChild(select);
+
+const div = document.createElement("div");
+div.setAttribute("data-js", "color-div");
+div.style.display = "flex";
+div.style.flexWrap = "wrap";
+form.after(div);
 
 select.addEventListener("change", (event) => {
-  const colorDiv = document.querySelector('[data-js="color"]');
-  colorDiv.innerHTML = "";
-  console.log([...event.target.selectedOptions].map((color) => color.value));
-  const divs = [...event.target.selectedOptions].map((color) => color.value);
-  divs.forEach((color) => {
-    const div = `<div style="width:100px; height:100px; background:${color}"></div>`;
-    colorDiv.insertAdjacentHTML("beforeend", div);
+  div.innerHTML = "";
+  [...event.target.selectedOptions].forEach(({ value }) => {
+    const div_color = document.createElement("div");
+    div_color.style.width = "100px";
+    div_color.style.height = "100px";
+    div_color.style.backgroundColor = value;
+    div.appendChild(div_color);
   });
 });
