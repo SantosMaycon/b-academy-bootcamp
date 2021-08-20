@@ -112,4 +112,29 @@ const GET_CARS = async () => {
   json.length === 0 ? createTdNone() : tdObject(json);
 };
 
+const POST_CAR = async (object) => {
+  await fetch(url, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(object),
+  });
+
+  await GET_CARS();
+};
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  [...event.target].forEach(({ name, value }, index) => {
+    if (name) addObjectValue[name](value);
+
+    name === "color"
+      ? (event.target[index].value = "#000000")
+      : (event.target[index].value = "");
+  });
+  POST_CAR(object);
+  event.target[0].focus();
+});
+
 await GET_CARS();
