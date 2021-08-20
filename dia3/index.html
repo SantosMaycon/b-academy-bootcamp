@@ -14,6 +14,51 @@
     <input type="text" name="name" id="name" data-js="input-name">
   </form>
 
+  <div class="wrapper-car">
+    <form data-js="form-cars">
+      <div>
+        <label for="image">Image (URL)</label>
+        <input type="text" id="image" name="image" required>
+      </div>
+
+      <div>
+        <label for="model">Model</label>
+        <input type="text" id="model" name="model" required>
+      </div>
+
+      <div>
+        <label for="year">Year</label>
+        <input type="number" id="year" name="year" required>
+      </div>
+
+      <div>
+        <label for="plate">Plate</label>
+        <input type="text" id="plate" name="plate" required>
+      </div>
+
+      <div>
+        <label for="color">Color</label>
+        <input type="color" id="color" name="color" required>
+      </div>
+
+      <button type="submit">Enviar</button>
+    </form>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Imagem</th>
+          <th>Model</th>
+          <th>Year</th>
+          <th>Plate</th>
+          <th>Color</th>
+        </tr>
+      </thead>
+
+      <tbody data-js="tbody"></tbody>
+    </table>
+  </div>
+
   <script type="module" src="/src/main.js"></script>
 </body>
 
