@@ -124,6 +124,20 @@ const POST_CAR = async (object) => {
   await GET_CARS();
 };
 
+const DELETE_CAR = async (plate) => {
+  await fetch(url, {
+    method: "Delete",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      plate,
+    }),
+  });
+
+  await GET_CARS();
+};
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   [...event.target].forEach(({ name, value }, index) => {
